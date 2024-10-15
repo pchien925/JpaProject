@@ -37,6 +37,7 @@ public class UserDaoImpl implements IUserDao {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
 
+		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 		try {
 			trans.begin();
 			enma.merge(user);

@@ -1,35 +1,46 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/commons/taglib.jsp"%>
 
-    <h1>Category List</h1>
+<a href="<c:url value='/admin/category/add'/>">Add Category</a>
+<br>
+<hr>
+<table border="1" width="100%">
+	<tr>
+		<th>STT</th>
+		<th>Images</th>
+		<th>Category name</th>
+		<th>Status</th>
+		<th>Action</th>
+	</tr>
+	<c:forEach items="${listcate}" var="cate" varStatus="STT">
+		<tr>
+			<td>${STT.index + 1}</td>
 
-    <a href="/admin/category/create">Add New Category</a>
+			<!-- Hiển thị ảnh từ link hoặc server -->
+			<c:choose>
+				<c:when
+					test="${cate.images != null && cate.images.startsWith('https')}">
+					<c:url value="${cate.images}" var="imgUrl" />
+				</c:when>
+				<c:otherwise>
+					<c:url value='/image?fname=${cate.images}' var="imgUrl" />
+				</c:otherwise>
+			</c:choose>
 
-    <!-- Check if cateList exists and is not empty -->
-    <c:if test="${not empty cateList}">
-        <table border="1" cellpadding="5" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Category Name</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Loop through cateList -->
-                <c:forEach var="category" items="${cateList}">
-                    <tr>
-                        <td>${category.categoryId}</td>
-                        <td>${category.categoryname}</td>
-                        <td>${category.status == 1 ? 'Active' : 'Inactive'}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
+			<td><img height="150" width="200" src="${cate.images}"
+				alt="Category Image" /></td>
+			<td>${cate.categoryname}</td>
 
-    <!-- Show message if cateList is empty -->
-    <c:if test="${empty cateList}">
-        <p>No categories found.</p>
-    </c:if>
+			<!-- Hiển thị trạng thái (có thể dùng số nguyên hoặc kiểu boolean) -->
+			<td>${cate.status == 1 ? 'Active' : 'Inactive'}</td>
+
+			<!-- Các nút hành động -->
+			<td><a
+				href="<c:url value='/admin/category/edit?id=${cate.categoryId}'/>">Sửa</a>
+				<a
+				href="<c:url value='/admin/category/delete?id=${cate.categoryId}'/>">Xóa</a>
+			</td>
+		</tr>
+	</c:forEach>
+</table>

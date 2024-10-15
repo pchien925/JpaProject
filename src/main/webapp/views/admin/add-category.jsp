@@ -2,15 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/commons/taglib.jsp"%>
 
-<form role="form" action="add" method="post"
+<form action="<c:url value="/admin/category/insert"/>" method="post"
 	enctype="multipart/form-data">
-	<div class="form-group">
-		<label>Tên danh mục:</label> <input class="form-control"
-			placeholder="please enter category Name" name="name" />
-	</div>
-	<div class="form-group">
-		<label>Ảnh đại diện</label> <input type="file" name="icon" />
-	</div>
-	<button type="submit" class="btn btn-default">Thêm</button>
-	<button type="reset" class="btn btn-primary">Hủy</button>
+	<label for="fname">Category name:</label><br> <input type="text"
+		id="categoryname" name="categoryname"><br> <label
+		for="lname">Link images:</label><br> <input type="text"
+		id="images" name="images"><br> <label for="lname">Upload
+		images:</label><br> <input type="file" id="images1" name="images1"><br>
+	<label for="html">Status</label><br> <input type="radio" id="ston"
+		name="status" value="1"> <label for="css">Hoạt động</label><br>
+	<input type="radio" id="stoff" name="status" value="0"> <label
+		for="javascript">Khóa</label> <br> <br> <input type="submit"
+		value="Insert">
 </form>
+

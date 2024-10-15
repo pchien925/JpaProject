@@ -29,14 +29,14 @@ public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CategoryId")
-	private int categoryId;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "Category_id")
+	private String categoryId;
 
-	@Column(name = "Categoryname", columnDefinition = "NVARCHAR(50) NOT NULL")
+	@Column(name = "Category_name", columnDefinition = "NVARCHAR(50) NOT NULL")
 	private String categoryname;
 
-	@Column(name = "Images", columnDefinition = "VARCHAR(3000) NULL")
+	@Column(name = "Images", columnDefinition = "VARCHAR(3000)")
 	private String images;
 
 	@Column(name = "Status")
@@ -45,5 +45,17 @@ public class Category implements Serializable {
 	@OneToMany(mappedBy = "category")
 	private List<Video> videos;
 
+	public Video addVideo(Video video) {
+		getVideos().add(video);
+		video.setCategory(this);
+		return video;
+	}
+
+	public Video removeVideo(Video video) {
+		getVideos().remove(video);
+		video.setCategory(null);
+		return video;
+
+	}
 
 }
