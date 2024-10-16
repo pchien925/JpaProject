@@ -34,7 +34,7 @@ public class Category implements Serializable {
 	private String categoryId;
 
 	@Column(name = "Category_name", columnDefinition = "NVARCHAR(50) NOT NULL")
-	private String categoryname;
+	private String categoryName;
 
 	@Column(name = "Images", columnDefinition = "VARCHAR(3000)")
 	private String images;

@@ -12,8 +12,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	ICategoryDao categoryDao = new CategoryDaoImpl();
 
 	@Override
-	public void insert(Category category) {
-		categoryDao.insert(category);
+	public void create(Category category) {
+		categoryDao.create(category);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	@Override
-	public void delete(int cateId) {
+	public void delete(String cateId) {
 		categoryDao.delete(cateId);
 	}
 
@@ -32,13 +32,13 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	@Override
-	public Category findById(int cateId) {
+	public Category findById(String cateId) {
 		return categoryDao.findById(cateId);
 	}
 
 	@Override
-	public List<Category> findByName(String cateName) {
-		return categoryDao.findByName(cateName);
+	public List<Category> findByCategoryName(String cateName) throws Exception {
+		return categoryDao.findByCategoryName(cateName);
 	}
 
 }

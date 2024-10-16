@@ -5,15 +5,15 @@ import java.util.List;
 import dev.pc.entity.Category;
 
 public interface ICategoryService {
-	void insert(Category category);
+	void create(Category category);
 
 	void update(Category category);
 
-	void delete(int cateId);
+	void delete(String cateId);
 
 	List<Category> findAll();
 
-	Category findById(int cateId);
+	Category findById(String cateId);
 
-	List<Category> findByName(String cateName);
+	List<Category> findByCategoryName(String cateName) throws Exception;
 }

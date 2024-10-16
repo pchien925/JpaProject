@@ -2,11 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/commons/taglib.jsp"%>
 
-<form action="<c:url value="/admin/category/insert"/>" method="post"
+<form action="<c:url value="/admin/category/update"/>" method="post"
 	enctype="multipart/form-data">
-	<label for="fname">Category name:</label><br> <input type="text"
-		id="categoryname" name="categoryName"><br> <label
-		for="lname">Title:</label><br> <input type="text"
+	<input type="text" name="categoryId" value="${cate.categoryId}"
+		hidden="hidden"> <label for="fname">Category name:</label><br>
+	<input type="text" id="categoryname" name="categoryName"><br>
+	<label for="lname">Title:</label><br> <input type="text"
 		id="title" name="title"><br> <label for="lname">Upload
 		images:</label><br> <input type="file" id="images" name="images"><br>
 	<label for="html">Status</label><br> <input type="radio" id="ston"
@@ -15,4 +16,3 @@
 		for="javascript">Khóa</label> <br> <br> <input type="submit"
 		value="Insert">
 </form>
-

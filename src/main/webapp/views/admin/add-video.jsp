@@ -3,9 +3,15 @@
 <%@include file="/commons/taglib.jsp"%>
 
 
-<div>Servlet Multipart</div>
-<form method="post" action="/HelloWorld/multiPartServlet"
+<form action="<c:url value="/admin/video/insert"/>" method="post"
 	enctype="multipart/form-data">
-	Choose a file: <input type="file" name="multiPartServlet" /> <input
-		type="submit" value="Upload" />
+	<label for="lname">Title:</label><br> <input type="text"
+		id="title" name="title"><br> <label for="video">Choose
+		a video file:</label> <input type="file" name="video" id="video"
+		accept="video/*" required> <br> <br> <label
+		for="html">Status</label><br> <input type="radio" id="ston"
+		name="status" value="1"> <label for="css">Hoạt động</label><br>
+	<input type="radio" id="stoff" name="status" value="0"> <label
+		for="javascript">Khóa</label> <br> <br>
+	<button type="submit">Upload Video</button>
 </form>

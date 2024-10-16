@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,8 +31,14 @@ public class Video implements Serializable {
 	@Column(name = "Video_id")
 	private String videoId;
 
+	@Column(name = "Title")
+	private String title;
+
 	@Column(name = "Format")
 	private String format;
+	
+	@Column(name = "Status")
+	private Integer status;
 
 	@Column(name = "Thumbnail_url")
 	private String thumbnailUrl;
@@ -45,4 +52,9 @@ public class Video implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "CategoryId")
 	private Category category;
+
+	@PrePersist
+	public void prePersist() {
+		this.createdAt = LocalDateTime.now();
+	}
 }

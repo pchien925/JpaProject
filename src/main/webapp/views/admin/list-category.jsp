@@ -30,7 +30,7 @@
 
 			<td><img height="150" width="200" src="${cate.images}"
 				alt="Category Image" /></td>
-			<td>${cate.categoryname}</td>
+			<td>${cate.categoryName}</td>
 
 			<!-- Hiển thị trạng thái (có thể dùng số nguyên hoặc kiểu boolean) -->
 			<td>${cate.status == 1 ? 'Active' : 'Inactive'}</td>

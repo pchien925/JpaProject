@@ -10,9 +10,8 @@ import jakarta.persistence.TypedQuery;
 
 public class CategoryDaoImpl implements ICategoryDao {
 
-	
 	@Override
-	public void insert(Category category) {
+	public void create(Category category) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
 
@@ -48,13 +47,13 @@ public class CategoryDaoImpl implements ICategoryDao {
 	}
 
 	@Override
-	public void delete(int cateId) {
+	public void delete(String cateId) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
 
 		try {
 			trans.begin();
-			enma.remove(this.findById(cateId));
+			enma.remove(enma.find(Category.class, cateId));
 			trans.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,17 +73,23 @@ public class CategoryDaoImpl implements ICategoryDao {
 	}
 
 	@Override
-	public Category findById(int cateId) {
+	public Category findById(String cateId) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		return enma.find(Category.class, cateId);
 	}
 
 	@Override
-	public List<Category> findByName(String cateName) {
+	public List<Category> findByCategoryName(String cateName) throws Exception {
 		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT c FROM Category c WHERE c.categoryname like: cateName";
-		TypedQuery<Category> query = enma.createNamedQuery(jpql, Category.class);
-		return query.getResultList();
+		String jpql = "select u from Category u where u.categoryName LIKE :cateName";
+		TypedQuery<Category> query = enma.createQuery(jpql, Category.class);
+		query.setParameter("cateName", "%" + cateName + "%");
+		try {
+			return query.getResultList();
+
+		} catch (Exception e) {
+			throw new Exception("Category not exitsted");
+		}
 	}
 
 }

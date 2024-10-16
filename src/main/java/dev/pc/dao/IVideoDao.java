@@ -13,5 +13,7 @@ public interface IVideoDao {
 
 	Video findById(String id) throws Exception;
 
+	List<Video> findByTitle(String title) throws Exception;
+
 	List<Video> findAll();
 }
